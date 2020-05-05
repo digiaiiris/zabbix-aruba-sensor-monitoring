@@ -2,6 +2,7 @@
 
 # Python imports
 import json
+import sys
 from argparse import ArgumentParser
 from aruba_client import ArubaClient
 
@@ -14,15 +15,24 @@ class ArubaDiscoverSensors(object):
 
     def list_sensors(self):
 
+        # Declare variables
+        sensor_data = []
+        sensor_list = []
+
         # Query the API for sensor data
         response = self._client.do_request()
 
         # Retrieve sensor data from response
-        sensor_data = response.get("payload").get("nodes")[0].get(
-            "state_summary").get("sensors")
+        for nodes in response.get("payload").get("nodes"):
+            if nodes.get("state_summary").get("sensors"):
+                for sensor in nodes.get("state_summary").get("sensors"):
+                    sensor_data.append(sensor)
+
+        # Check sensor data
+        if not sensor_data:
+            return sensor_list
 
         # List sensors from response
-        sensor_list = []
         for item in sensor_data:
             sensor_list.append(item)
 
@@ -48,6 +58,11 @@ def main(args=None):
 
     # Retrieve sensors using discovery client
     sensor_list = discovery_client.list_sensors()
+
+    # Check if there are sensors in list
+    if not sensor_list:
+        print("{}")
+        sys.exit()
 
     # Loop sensor data and retrieve sensor names and UIDs
     sensors = []

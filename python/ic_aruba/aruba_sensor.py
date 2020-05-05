@@ -14,12 +14,21 @@ class ArubaSensor(object):
 
     def sensor_status(self, sensor_uid):
 
+        # Declare variables
+        sensor_data = []
+
         # Query the API for sensor data
         response = self._client.do_request()
 
         # Retrieve sensor data from response
-        sensor_data = response.get("payload").get("nodes")[0].get(
-            "state_summary").get("sensors")
+        for nodes in response.get("payload").get("nodes"):
+            if nodes.get("state_summary").get("sensors"):
+                for sensor in nodes.get("state_summary").get("sensors"):
+                    sensor_data.append(sensor)
+
+        # Check sensor data
+        if not sensor_data:
+            return None
 
         # Loop sensor data and try to retrieve specified sensor state
         for item in sensor_data:

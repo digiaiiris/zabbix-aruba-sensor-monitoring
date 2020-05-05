@@ -6,7 +6,7 @@ from setuptools import setup
 
 setup(
     name="aruba-sensor-monitoring",
-    version="1.0.0",
+    version="1.0.1",
     author="Antti-Pekka Meronen",
     author_email="antti-pekka.meronen@digia.com",
     description="Monitoring scripts for Aruba sensors",

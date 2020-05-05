@@ -17,7 +17,7 @@ This python module provides Zabbix monitoring support for Aruba sensors using th
 1. Install the python module using pip.
 
 ```
-pip install https://github.com/digiaiiris/zabbix-aruba-sensor-monitoring/releases/download/1.0.0/aruba-sensor-monitoring-1.0.0.tar.gz
+pip install https://github.com/digiaiiris/zabbix-aruba-sensor-monitoring/releases/download/1.0.1/aruba-sensor-monitoring-1.0.1.tar.gz
 ```
 
 2. Copy the [Zabbix agent configuration](etc/zabbix/zabbix_agentd.d/ic_aruba.conf) to /etc/zabbix/zabbix_agentd.d directory.
